@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<script type="text/javascript">
+	
+		var slideshow = {
+		photoList: ['barn.jpg','farm.jpg','farm_animals.jpg'],
+		currentPhotoIndex: 0,
+		playInterval: null,
+		nextPhoto: function() {
+			this.currentPhotoIndex += 1;
+			this.getCurrentPhoto();
+
+		},
+		prevPhoto: function() {
+			this.currentPhotoIndex -= 1;	
+			this.getCurrentPhoto();
+		},	
+
+		getCurrentPhoto: function() {
+			if (this.currentPhotoIndex < 0 || this.currentPhotoIndex >= this.photoList.length) {
+				console.log('End of slideshow!');	
+				this.pause();
+			} else {
+				console.log(this.photoList[this.currentPhotoIndex]);
+			}
+		},
+
+		play: function() {
+			playInterval = function(){
+				this.nextPhoto()
+			}.bind(this);
+			
+			playFunction = setInterval(function(){
+				playInterval();}, 2000)
+		},
+
+		pause: function() {
+			clearInterval(playFunction);
+		}
+	}
+	slideshow.play();		
+	</script>
+</body>
+</html>
